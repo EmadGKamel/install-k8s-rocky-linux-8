@@ -70,18 +70,18 @@ echo
 echo "Update Kernel modules and sysctl settings"
 echo 
 {
-cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+cat <<EOF | tee /etc/modules-load.d/k8s.conf
 br_netfilter
 EOF
 
-cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+cat <<EOF | tee /etc/sysctl.d/k8s.conf
 net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
 EOF
 
 sysctl --system
 
-cat <<EOF | sudo tee /etc/modules-load.d/crio.conf
+cat <<EOF | tee /etc/modules-load.d/crio.conf
 overlay
 br_netfilter
 EOF
@@ -89,7 +89,7 @@ EOF
 modprobe overlay
 modprobe br_netfilter
 
-cat <<EOF | sudo tee /etc/sysctl.d/99-kubernetes-cri.conf
+cat <<EOF | tee /etc/sysctl.d/99-kubernetes-cri.conf
 net.bridge.bridge-nf-call-iptables  = 1
 net.ipv4.ip_forward                 = 1
 net.bridge.bridge-nf-call-ip6tables = 1
@@ -105,7 +105,7 @@ echo
 echo "Update node repos and install dependencies"
 echo 
 {
-cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
+cat <<EOF | tee /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
 baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-\$basearch
@@ -146,7 +146,7 @@ echo
 KUBELET_PATH=/usr/lib/systemd/system/kubelet.service.d
 cp -f $KUBELET_PATH/10-kubeadm.conf $KUBELET_PATH/10-kubeadm.conf.bak
 sed -i '8 a Environment=\"KUBELET_CGROUP_ARGS=--cgroup-driver=systemd\"' $KUBELET_PATH/10-kubeadm.conf
-sed -i '/^ExecStart/ s/$/ \$KUBELET_CGROUP_ARGS/' $KUBELET_PATH/10-kubeadm.conf
+sed -i '/^ExecStart=\// s/$/ \$KUBELET_CGROUP_ARGS/' $KUBELET_PATH/10-kubeadm.conf
 
 
 ## Reloading systemctl daemon
