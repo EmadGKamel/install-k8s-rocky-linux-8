@@ -21,7 +21,7 @@ To start using your cluster, you need to run the following as a regular user:
     mkdir -p $HOME/.kube
     sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
     sudo chown $(id -u):$(id -g) $HOME/.kube/config
-You should now deploy a Pod network to the cluster, for example, to use Calico network plugin use the following commands:
+You should now deploy a network plugin Pod to the cluster, for example, to use Calico network plugin use the following commands:
 
     curl https://docs.projectcalico.org/manifests/calico.yaml -O
     kubectl apply -f calico.yaml
