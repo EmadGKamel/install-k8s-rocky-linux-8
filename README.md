@@ -5,7 +5,7 @@
 ## Intro
 This `bash` script is used to install Kubernetes on Rocky Linux 8 using **kubeadm** & **CRI-O** as a container runtime.
 
-The `install.sh` will configure each node and install the main components which are: 
+The file `install.sh` will configure each node and install the main components which are: 
 > cri-o, kubelet, kubeadm, kubectl
 
 ## Setup cluster nodes
