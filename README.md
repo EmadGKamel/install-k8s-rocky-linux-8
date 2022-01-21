@@ -60,7 +60,7 @@ Then use `kubectl` to apply the following configuration, it will gives MetalLB c
     EOF
 
 ## Configure CRI-O with Docker Access token
-To bypass Docker pull images policy or to pull images from a private registry, use the following command:
+To bypass Docker pull images policy, configure nodes to authenticate to a private registry:
 
     cat <<EOF | tee -a /etc/crio/crio.conf
     [crio.image]
