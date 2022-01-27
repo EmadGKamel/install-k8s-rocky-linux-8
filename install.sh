@@ -162,7 +162,9 @@ echo
 echo 
 echo "All configuration done successfully..."
 echo
-echo "*** This node will reboot in 10 sec, once rebooting you can issue \"kubeadm init\" command on master node. ***"
+echo "*** This node will reboot in 10 sec, once rebooting you can issue \"kubeadm init --pod-network-cidr=10.96.0.0/12\" command on master node. ***"
+echo "Calico will automatically detect the CIDR based on the running configuration when passed as a flag at kubeadm init."
+echo "Otherwise it will always default to CIDR 192.168.0.0/16"
 echo
 echo "Happy Kubernetes"
 sleep 10 ; reboot
