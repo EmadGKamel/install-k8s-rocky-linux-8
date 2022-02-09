@@ -1,5 +1,5 @@
 # Install Kubernetes on Rocky Linux 8, CentOS 8, and compatibles using kubeadm & CRI-O
-<center> ** switch to root user before start ** </center>
+<p align="center"> ** switch to root user before start ** </p>
 
     sudo su -
 ## Intro
